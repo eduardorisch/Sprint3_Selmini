@@ -4,12 +4,12 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
-public class Conexão {
+public class Conexao {
     private static String url = "jdbc:oracle:thin:@oracle.fiap.com.br:1521:orcl";
     private static String user = "rm555212";
     private static String password = "110106";
 
-    private Conexão(){}
+    private Conexao(){}
 
     public static Connection conectar(){
         try {

@@ -1,6 +1,6 @@
 package Modelos;
 
-import Conexão.Conexão;
+import Conexão.Conexao;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -16,7 +16,7 @@ public class TesteDAO {
 
     public void inserir (Teste teste){
         sql = "insert into java_teste values(?, ?, ?)";
-        try (Connection connection = Conexão.conectar()){
+        try (Connection connection = Conexao.conectar()){
             ps = connection.prepareStatement(sql);
             ps.setLong(1, teste.getId());
             ps.setString(2, teste.getNome());
@@ -28,10 +28,10 @@ public class TesteDAO {
         }
     }
 
-    public List<Teste> pesquisar(){
+    public List<Teste> pesquisar(Long id){
         List<Teste> lista = new ArrayList<>();
-        sql = "select * from java_teste";
-        try (Connection connection = Conexão.conectar()){
+        sql = "select * from java_teste where teste_id = " + id;
+        try (Connection connection = Conexao.conectar()){
             ps = connection.prepareStatement(sql);
             rs = ps.executeQuery();
             while (rs.next()){
@@ -39,8 +39,19 @@ public class TesteDAO {
             }
         }
         catch (SQLException e){
-            System.out.println("Erro ao pesquisar no banco de dados\n" + e);
+            System.out.println("Erro ao pesquisar linha no banco de dados\n" + e);
         }
         return lista;
+    }
+
+    public void exclusao(Long id){
+        sql = "delete from java_teste where teste_id = " + id;
+        try (Connection connection = Conexao.conectar()){
+            ps = connection.prepareStatement(sql);
+            ps.execute();
+        }
+        catch (SQLException e){
+            System.out.println("Erro ao excluir linha no banco de dados\n" + e);
+        }
     }
 }
