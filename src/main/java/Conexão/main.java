@@ -37,7 +37,7 @@ public class main {
                 System.out.println("");
             }
             else if (opt == 2) {
-                System.out.println("Digite o ID: ");
+                System.out.println("Digite o ID para pesquisar: ");
                 Long id = in.nextLong();
                 List<Teste> lista = dao.pesquisar(id);
                 for (Teste x : lista){
@@ -46,11 +46,17 @@ public class main {
                 System.out.println("");
             }
             else if (opt == 3) {
-                System.out.println("n sei");
+                System.out.println("Digite o ID para alterar: ");
+                Long id = in.nextLong();
+                System.out.println("Digite o nome: ");
+                String nm = in.next();
+                System.out.println("Digite o valor: ");
+                Double vl = in.nextDouble();
+                dao.alterar(id,nm,vl);
                 System.out.println("");
             }
             else if (opt == 4) {
-                System.out.println("Digite o ID: ");
+                System.out.println("Digite o ID para excluir: ");
                 Long id = in.nextLong();
                 dao.exclusao(id);
                 System.out.println("Linha excluida do Banco de Dados!!!");

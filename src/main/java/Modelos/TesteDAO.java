@@ -24,7 +24,7 @@ public class TesteDAO {
             ps.execute();
         }
         catch (SQLException e){
-            System.out.println("Erro ao inserir no banco de dados\n" + e);
+            System.out.println("Erro ao inserir linha no banco de dados\n" + e);
         }
     }
 
@@ -42,6 +42,20 @@ public class TesteDAO {
             System.out.println("Erro ao pesquisar linha no banco de dados\n" + e);
         }
         return lista;
+    }
+
+    public void alterar (Long id, String nome, Double valor){
+        sql = "update java_teste set teste_nm = ?,teste_vl = ? where teste_id = ?";
+        try (Connection connection = Conexao.conectar()){
+            ps = connection.prepareStatement(sql);
+            ps.setString(1, nome);
+            ps.setDouble(2, valor);
+            ps.setLong(3, id);
+            ps.execute();
+        }
+        catch (SQLException e){
+            System.out.println("Erro ao alterar linha no banco de dados\n" + e);
+        }
     }
 
     public void exclusao(Long id){
